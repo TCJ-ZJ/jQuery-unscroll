@@ -4,9 +4,9 @@
 		<meta charset="UTF-8">
 		<title>jQuery滚动条 作者：lzmoop(磨盘兄弟) </title>
 		<script src='js/jquery-1.11.1.min.js'></script>
-		<script src="js/jquery-unscroll.1.0.0.js"></script>
+		<script src="js/lz-scroll-1.0.0.min.js"></script>
 		<link rel="stylesheet" href="css/reset-min.css">
-		<link rel="stylesheet" href="css/jquery-unscroll.css">
+		<link rel="stylesheet" href="css/lz-scroll.css">
 		<style>
 			body{width:100%;height:100%;background:#eee}
 			#pageHader{width: 100%;background-color:#ffba34;margin-bottom: 20px;}
@@ -92,14 +92,14 @@
 
 		<footer id='foot'>
 			<p>本插件手册由 @lzmoop(磨盘兄弟) 提供</p>
-			<p>jQuery-unscroll v1.0.0 | (c) 2016-2025  jQuery plug-in | lzmoop 2016-10</p>
+			<p>lz-scroll v1.0.0 | (c) 2016-2025  jQuery plug-in | lzmoop 2016-10</p>
 		</footer>
 		<script>
 			$(function(){
-				$('#scroll1').unscroll();
-				$('#scroll2').unscroll('xy');
-				$('#scroll3').unscroll({axis:'xy',display:false});
-				$('#scroll4').unscroll({axis:'xy',display:false,speed:10});
+				$('#scroll1').lzscroll();
+				$('#scroll2').lzscroll('xy');
+				$('#scroll3').lzscroll({axis:'xy',display:false});
+				$('#scroll4').lzscroll({axis:'xy',display:false,speed:10});
 			})
 			/* 本插件由@lzmoop(磨盘兄弟)提供 */
 		</script>
