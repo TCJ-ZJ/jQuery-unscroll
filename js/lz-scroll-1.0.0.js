@@ -19,7 +19,19 @@
 		}
 	})
 
+/*！
+* 定义构造函数--事件函数
+*
+* 初始化该对象上的各类参数
+*
+* 设置各类prototype的方法设置事件函数 
+*/
+
+	// 创建一个构造函数
+
 	var scrollEvent = function(val){
+
+		//初始化各类参数
 
 		this.$ele = $(val);
 
@@ -33,19 +45,29 @@
 
 	}
 
+	// 设置事件函数，用于调用所有事件函数
+
 	scrollEvent.prototype.setEvent = function(){
+
+		// 初始化对象和参数
 
 		var event = this,
 
 		param = this.param;
 
+		// 如果事件（event）参数为数组，则调用所有事件函数
+
 		if($.isArray(param.event)){
+
+			// 调用所有事件函数以绑定元素
 
 			$.each(param.event, function(index, val) {
 				
 				event[val]  && event[val]();
 
 			});
+
+		// 如果事件（event）参数不为数组，则调用当前事件
 
 		}else{
 
@@ -55,7 +77,11 @@
 
 	}
 
+	// 定义默认的滚轮控制事件并放入事件函数的原型中
+
 	scrollEvent.prototype.wheel = function(){
+
+		// 初始化各类参数
 
 		var me = this.$ele,
 
@@ -65,7 +91,11 @@
 
 		speed = param.speed;
 
+		// 添加滚轮事件
+
 		me.on('mousewheel DOMMouseScroll', function(e) {
+
+			// 判断是否只有横向滚动条，如果是则移动横向，否则移动垂直滚动条
 
 			var control = param.axis==='x'?status.controlW:status.controlH,
 
@@ -74,28 +104,42 @@
 			box = param.axis==='x'?status.boxW: status.boxH-status.space;
 			
 			e.preventDefault();
+
+			// 判断是否可以调用滚轮事件以及滚动条是否存在
 			
 			if(status.wheelflag && control){
 
 				var delta = (e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1 : -1)) || // chrome & ie 判断滚轮方向
 	            		(e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1 : 1));// firefox  判断滚轮方向 
 
+	            // 如果是向上滑动
+
 	            if(delta>0){
+
+	            	// 如果当前距离滚动条顶部或左边大于滚动速度，则滚动相应距离
 
 	            	if(move>speed){
 
 	            		move -= speed;
+
+	            	// 如果当前滚动条距离顶部或左边小于滚动速度，则将滚动距离设置为0
 
 	            	}else{
 
 	            		move = 0;
 	            	}
 
+	            // 如果是向下滑动	
+
 	            }else if(delta<0){
+
+	            	// 如果当前滚动条距离底部或右边大于滚动速度，则滚动相应距离
 
 	            	if(move+control+speed<box){
 
 	            		move+=speed;
+
+	            	// 如果当前滚动条距离底部或右边小于滚动速度，则滚动相应距离设置为最大距离
 
 	            	}else{
 
@@ -105,11 +149,15 @@
 
 	            }
 
+	            // 如果只有水平滚动条，则改变水平滚动距离，并调用水平滚动函数
+
 	            if(param.axis ==='x'){
 
 	            	status.moveW = move;
 
 	            	me.scrollExcute('x');
+
+	            // 否则改变垂直滚动距离，并调用垂直滚动函数
 
 	            }else{
 
@@ -125,7 +173,11 @@
 
 	}
 
+	// 定义默认的拖拽控制事件并放入事件函数的原型中
+
 	scrollEvent.prototype.drag = function(){
+
+		// 初始化各类参数
 
 		var me = this.$ele,
 
@@ -137,17 +189,19 @@
 
 		doc = $(document);
 
-		var objToTop = me.offset().top,
+		var objToTop = me.offset().top, // 父级元素距离窗口顶部的距离
 
-		objToLeft = me.offset().left,
+		objToLeft = me.offset().left,  // 父级元素距离窗口左侧的距离
 
-		interY = 0,
+		interY = 0, // 鼠标点击时距离父级元素顶部的距离
 
-		outerY = 0,
+		outerY = 0, // 鼠标移动时距离窗口顶部的距离
 
-		interX = 0,
+		interX = 0, // 鼠标点击时距离父级元素左侧的距离
 
-		outerX = 0;
+		outerX = 0; // 鼠标移动时距离窗口左侧的距离
+
+		// 如果存在水平滚动条，则给滚动条加上拖拽事件
 
 		if(controlX){
 
@@ -167,6 +221,8 @@
 
 		}
 
+		// 如果存在垂直滚动条，则给滚动条加上拖拽事件
+
 		if(controlY){
 
 			controlY.on('mousedown', function(e) {
@@ -185,6 +241,8 @@
 
 		}
 
+		// 当鼠标松开，解除拖拽
+
 		doc.on('mouseup', function(e) {
 			
 			status.mouseY = false;
@@ -195,7 +253,11 @@
 
 		});
 
+		// 当鼠标移动时，判断进行相应的滚动操作
+
 		doc.on('mousemove', function(e) {
+
+			// 如果点击的是垂直滚动条
 			
 			if(status.mouseY){
 
@@ -216,6 +278,8 @@
 				me.scrollExcute('y');
 
 			}
+
+			// 如果点击的是水平滚动条
 
 			if(status.mouseX){
 
@@ -241,6 +305,8 @@
 
 	}
 
+	// 定义默认的显示隐藏事件并放入事件函数的原型中
+
 	scrollEvent.prototype.display = function(){
 
 		var me = this.$ele,
@@ -251,11 +317,15 @@
 
 		controlY = this.controlY;
 
+		// 当鼠标进入父级元素时，如果有滚动条，则将其显示
+
 		me.on('mouseover', function(e) {
 			
 			!!controlX && controlX.show();
 
 			!!controlY && controlY.show();
+
+		// 当鼠标进入父级元素时，如果有滚动条且不处于拖拽事件时，则将其隐藏
 
 		}).on('mouseout', function(e) {
 			
@@ -267,6 +337,8 @@
 
 	}
 
+	// 定义默认的内容高度改变的监听事件并放入事件函数的原型中
+
 	scrollEvent.prototype.change = function(){
 
 		var me = this.$ele,
@@ -276,6 +348,8 @@
 		controlX = this.controlX,
 
 		controlY = this.controlY,
+
+		// 调用Mutationobserver对象对其进行监控
 
 		observer = new MutationObserver(function(){
 
@@ -311,7 +385,19 @@
 
 	}
 
+/*！
+* 定义构造函数--执行函数
+*
+* 初始化该对象上的各类参数
+*
+* 设置各类prototype的方法：滚动条和内容高度的计算，并进行滚动操作
+*/
+
+	// 创建构造函数
+
 	var scrollMethods = function(val){
+
+		// 初始化各类参数
 
 		this.$ele = $(val);
 
@@ -320,6 +406,8 @@
 		this.status = this.$ele.data('scroll-status');
 
 	}
+
+	// 如果内容元素高度改变，进行垂直滚动条的更新
 
 	scrollMethods.prototype.updateY = function(){
 
@@ -359,6 +447,8 @@
 
 		status.moveH = moveH;
 	}
+
+	// 如果内容元素宽度改变，进行水平滚动条的更新
 
 	scrollMethods.prototype.updateX = function(){
 
@@ -400,11 +490,15 @@
 
 	}
 
+	// 执行函数
+
 	scrollMethods.prototype.doScroll = function(axis){
 
 		this["calculate"+axis.toUpperCase()]();
 
 	}
+
+	// 执行垂直滚动条的移动
 
 	scrollMethods.prototype.calculateY = function(){
 
@@ -440,6 +534,8 @@
 
 	}
 
+	// 执行水平滚动条的移动
+
 	scrollMethods.prototype.calculateX = function(){
 
 		var me = this.$ele,
@@ -474,34 +570,51 @@
 
 	}
 
+/*！
+* 定义构造函数--初始化函数
+*
+* 初始化该对象上的各类参数
+*
+* 设置各类prototype的方法：包括初始化参数，初始化事件，初始化布局
+*/
 
 	var scrollInit = function(val,a,b,c,d,e){
 
+		// 初始化对象上的参数
+
 		this.$ele = $(val);
+
+		// 参数
 
 		this.$ele.data('scroll-param',this.initParam(a,b,c,d,e));
 
+		// 执行状态
+
 		this.$ele.data('scroll-status',{
-			wheelflag:true,
-			mouseX:false,
-			mouseY:false,
-			mouseH:false,
-			contentH:0,
-			contentW:0,
-			boxH:0,
-			boxW:0,
-			controlH:0,
-			controlW:0,
-			moveH:0,
-			moveW:0,
-			space:0
+			wheelflag:true, // 是否可以执行滚轮事件
+			mouseX:false,   // 是否点击水平滚动条进行拖拽操作
+			mouseY:false,   // 是否点击垂直滚动条进行拖拽操作
+			mouseH:false,   // 鼠标是否在父级元素内部
+			contentH:0,     // 父级元素内容高度
+			contentW:0,     // 父级元素内容宽度
+			boxH:0,         // 父级元素盒子高度
+			boxW:0,         // 父级元素盒子宽度
+			controlH:0,     // 垂直滚动条高度
+			controlW:0,     // 水平滚动条宽度
+			moveH:0,        // 垂直滚动条移动距离
+			moveW:0,        // 水平滚动条移动距离
+			space:0         // 垂直和水平滚动条同时出现时的间隙
 		})
 
 		this.arr = this.$ele.data('scroll-param').axis.split('');
 
 	}
 
+	// 初始化事件函数
+
 	scrollInit.prototype.initEvent = function(){
+
+		// 初始化各类参数
 
 		var me = this.$ele,
 
@@ -527,6 +640,10 @@
 
 		}
 
+		// 当窗口发生变化时，自动调整滚动条
+
+		// 用于保证窗口改变时效果的正确执行
+
 		$(window).resize(function(e) {
 			
 			me.scrollUpdate(arr);
@@ -537,9 +654,13 @@
 
 		});
 
+		// 设置当鼠标移入盒子时将mouseH参数设置为true
+
 		me.on('mouseover', function(e) {
 			
 			status.mouseH = true;
+
+		// 设置当鼠标移出盒子时将mouseH参数设置为false
 			
 		}).on('mouseout', function(e) {
 			
@@ -551,7 +672,11 @@
 
 	}
 
+	// 初始化页面布局
+
 	scrollInit.prototype.layout = function(){
+
+		// 初始化各类参数
 
 		var me = this.$ele,
 
@@ -571,11 +696,15 @@
 
 		}
 
+		// 获取当前所选的css类名
+
 		var unscrollClass = 'lzscroll-'+param.theme;
 
 		var controlY = $("<div class='"+unscrollClass+"-Y'></div>").addClass('scroll-controlY');
 
 		var controlX = $("<div class='"+unscrollClass+"-X'></div>").addClass('scroll-controlX');
+
+		// 如果axis为x，添加水平滚动条
 
 		if(param.axis === 'x'){
 
@@ -583,11 +712,15 @@
 
 			me.data('scroll-controlX',me.find('.scroll-controlX'));
 
+		// 如果axis为y，添加垂直滚动条
+
 		}else if(param.axis === 'y'){
 
 			controlY.appendTo(me)
 
 			me.data('scroll-controlY',me.find('.scroll-controlY'));
+
+		// 如果axis为xy或者yx，添加水平和垂直滚动条
 
 		}else{
 
@@ -601,7 +734,11 @@
 
 		}
 
+		// 更新滚动条状态
+
 		me.scrollUpdate(this.arr);
+
+		// 设置滚动条的样式
 
 		if(me.data('scroll-controlY')){
 
@@ -615,21 +752,51 @@
 
 		}
 		
-	}	
+	}
+
+	// 初始化各项参数	
 
 	scrollInit.prototype.initParam = function(a,b,c,d,e){
 
 		var param = {
 
+			// 滚动条参数，默认值为y
+
+			// 取值包括y（可省略） x xy yx
+
 			axis : 'y',
+
+			// 类名
 
 			theme : 'default',
 
+			// 滚轮滚动的速度
+
+			// 默认取值20，即滚一下，滚动条滚动20px的距离
+
+			// 参数可缺省
+
 			speed : 20,
+
+			// 自动隐藏参数
+
+			// 默认值为true
+
+			// 取值 true false
 
 			display : true,
 
+			// 滚动条的宽度
+
+			// 默认取值8
+
+			// 参数可缺省
+
 			width : 8,
+
+			// 事件参数
+
+			// 非传参参数
 
 			event : ['wheel','drag','change']
 
@@ -677,6 +844,10 @@
 
 	}
 
+/*！
+* 在jQuery原型中创建一个对象级方法，用于当内容高度或宽度改变时，调用该函数进行滚动条的修整
+*/
+
 	$.fn.scrollUpdate = function(arr){
 
 		var me = $(this).get(0);
@@ -689,6 +860,10 @@
 
 	}
 
+/*！
+* 在jQuery原型中创建一个对象级方法，用于调用执行方法
+*/
+
 	$.fn.scrollExcute =function(axis){
 
 		var me = $(this).get(0);
@@ -697,10 +872,19 @@
 
 	}
 
+/*！
+* 在jQuery原型中创建一个对象级方法，用于调用scroll方法
+*/
 
 	$.fn.lzscroll = function(a,b,c,d,e){
 
+		// 将调用对象保保存在变量me中
+
+		// 此处非功能对象而是页面上的元素DOM对象
+
 		var me = $(this);
+
+		// 循环遍历添加scroll方法
 
 		$.each(me, function(index, val) {
 			
@@ -713,6 +897,8 @@
 			newScrollBar.initEvent();
 
 		});
+
+		return me;
 
 	}
 
