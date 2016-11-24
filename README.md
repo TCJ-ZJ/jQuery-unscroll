@@ -1,8 +1,8 @@
-## jQuery-unscroll使用手册
+## lz-scroll使用手册
 **当前版本： V1.0.0**
 
-### jQuery-unscroll是什么
->jQuery-uscroll是一款基于jQuery库开发的轻量级滚动条插件，方便开发者能够自定义滚动条样式。可以设置滚动速度，是否一直显示滚动条，并且能够根据父级的高度变化而自我调整。
+### lz-scroll是什么
+>lz-scroll是一款基于jQuery库开发的轻量级滚动条插件，方便开发者能够自定义滚动条样式。可以设置滚动速度，是否一直显示滚动条，并且能够根据父级的高度变化而自我调整。当前版本为正式版1.0.0
 ### 具体参数列表
 
 | 参数名称 | 参数变量 | 参数取值 | 参数说明 |
@@ -17,8 +17,8 @@
 --此插件基于jQuery开发
 ```HTML
 <script src="js/jquery-11.1.1.min.js"></script>
-<script src="js/jquery-unscroll.1.0.0.min.js"></script>
-<link href="css/jquery-unscroll.css" rel="stylesheet" type="text/css">
+<script src="js/lz-scroll.1.0.0.min.js"></script>
+<link href="css/lz-scroll.css" rel="stylesheet" type="text/css">
 ```	
 
 ### 调用插件
@@ -32,7 +32,7 @@
 ```javascript
 <script type="javascript">
     <!--
-        $('#unscroll1').unscroll('xy',20,10,true,'mytheme') //滚动条方向 滚动速度 滚动条宽度 是否持续显示 样式名 
+        $('#unscroll1').lzscroll('xy',20,10,true,'mytheme') //滚动条方向 滚动速度 滚动条宽度 是否持续显示 样式名 
 		    $('#unscroll2').unscroll(20) //滚动速度
         $('#unscroll3').unscroll(false) //是否持续显示
 
@@ -52,7 +52,7 @@
 ### 提供的css选择器
 --自定义样式时请带上外层父级id，避免同一页面多个组件样式冲突
 ```css
-.unscroll-theme-Y  //垂直滚动条样式
-.unscroll-theme-X  //水平滚动条样式
+.lzscroll-theme-Y  //垂直滚动条样式
+.lzscroll-theme-X  //水平滚动条样式
 ```
 © 本手册由 磨盘兄弟 @lzmoop 官方提供 www.lzmoop.com
