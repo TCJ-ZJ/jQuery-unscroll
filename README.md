@@ -32,9 +32,9 @@
 ```javascript
 <script type="javascript">
     <!--
-        $('#lzscroll1').lzscroll('xy',20,10,true,'mytheme') //滚动条方向 滚动速度 滚动条宽度 是否持续显示 样式名 
+    	$('#lzscroll1').lzscroll('xy',20,10,true,'mytheme') //滚动条方向 滚动速度 滚动条宽度 是否持续显示 样式名 
 	$('#lzscroll2').lzscroll(20) //滚动速度
-        $('#lzscroll3').lzscroll(false) //是否持续显示
+	$('#lzscroll3').lzscroll(false) //是否持续显示
 
         /* 或使用对象传参 */
 
