@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>jQuery滚动条 作者：lzmoop(磨盘兄弟) </title>
+		<script src='js/jquery-1.11.1.min.js'></script>
+		<script src="js/jquery-unscroll.1.0.0.js"></script>
+		<link rel="stylesheet" href="css/reset-min.css">
+		<link rel="stylesheet" href="css/jquery-unscroll.css">
+		<style>
+			body{width:100%;height:100%;background:#eee}
+			#pageHader{width: 100%;background-color:#ffba34;margin-bottom: 20px;}
+			.inPageHader{width:1024px;height:52px;line-height:52px;margin:0 auto;}
+			#pageHader h1{color:#fff;}
+			#pageHader h3 a{color:#fff;}#pageHader h3 a:hover{color:#ff0;text-decoration:none;}
+			#banner{width:990px;height:360px;margin: 0 auto;position: relative; padding:16px;background:#fff;}
+			.banner>ul:first-child{width:990px;height:360px;position:absolute;overflow:hidden;}
+			.bannerTitle{width: 1024px;margin:0 auto; color:#ffbc3a;margin-bottom:15px}
+			
+			.page{width:1000px;border:2px solid #f3c562;line-height:32px;margin:20px auto 0;padding:12px;background:#fff3a2;}
+			.page h3{font-family:'微软雅黑';font-size:18px;color:#b88008;text-indent:1em;font-weight:500;}
+			.page>p{font-size:18px;color:#b88008;text-indent:1em}
+			#csBg{width: 1024px;margin:20px auto;}
+			#csBg table{width: 100%;border: 1px solid #ddd;border-right:0;font-size: 16px;color: #666}
+			#csBg table thead{background: #ccc;}
+			#csBg table tr{height: 36px;line-height: 36px;margin:1px;}
+			#csBg tr.trds{background: #ddd}
+			#csBg td{border-right:1px solid #ddd;padding-left:30px;}
+			.htmlPD{margin-bottom: 20px}
+			p.htmlPd{font-size: 16px;color: #888;line-height: 36px}
+			#foot{width: 100%;background: #333;height: 100px;padding-top:40px;line-height: 34px;text-align: center;color: #ddd;font-size:14px}
+			div.tot{width:1000px;line-height:24px;margin:0 auto;padding:12px;background:#666;color: #fff;font-size:14px}
+			#gotoTop{width:26px;height:26px; padding:10px; background:url('./images/pic.png') 4px -120px no-repeat #ccc;position:fixed;right:0;bottom:150px;display:none;cursor:pointer;}
+			#gotoTop:hover{background-color:#f66 }
+            #foot{position:fixed;bottom: 0}
+		</style>
+	</head>
+	<body>
+		<header id="pageHader">
+			<div class='inPageHader'>
+				<h1>jQuery滚动条轮播插件 V1.0.0 beta Demo</h1>
+			</div>
+		</header>
+		<div class='bannerTitle'>
+			<h1>Unscroll demo</h1>
+		</div>
+
+<!--  **************************** 以下是unscroll部分 ********************************************* -->
+
+		<div id="scroll1" class="scroll" >
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, omnis aspernatur maxime reprehenderit nobis quisquam aliquam ut, hic ullam delectus saepe id ducimus earum voluptatem odit eum minus doloremque eveniet.
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut aliquam rerum, est sunt possimus enim expedita animi, necessitatibus neque, illo nulla minus? Aliquid, praesentium, neque. Aliquam nisi odio, sunt adipisci.
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil nesciunt ipsa sit sapiente officia, corrupti pariatur cum, culpa aut enim id voluptatem numquam iusto alias similique veniam ducimus vero voluptatibus!
+		</div>
+		
+
+		<div id='scroll2' class='scroll'>
+			<div class='part1'>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet reiciendis vitae rem quisquam cum sapiente sequi iure laborum dicta, laudantium ratione dignissimos reprehenderit alias, nostrum, cupiditate possimus! Amet, explicabo, quos.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam ut esse, culpa ab modi maxime similique architecto numquam iste odio earum voluptas molestias animi alias, repudiandae suscipit labore, velit praesentium.
+			</div>
+			<div class='part2'>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto suscipit consequatur, distinctio odio voluptate qui repellat dolores provident laborum dolorum aut ipsam quod tenetur, fuga, impedit fugiat totam consequuntur enim!
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi deleniti dolores eius quod, obcaecati delectus. Temporibus nihil provident, ea assumenda quis at, omnis explicabo esse reprehenderit cumque, animi ipsum iure!
+			</div>
+		</div>
+
+		<div id='scroll3' class='scroll'>
+			<div class='part1'>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet reiciendis vitae rem quisquam cum sapiente sequi iure laborum dicta, laudantium ratione dignissimos reprehenderit alias, nostrum, cupiditate possimus! Amet, explicabo, quos.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam ut esse, culpa ab modi maxime similique architecto numquam iste odio earum voluptas molestias animi alias, repudiandae suscipit labore, velit praesentium.
+			</div>
+			<div class='part2'>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto suscipit consequatur, distinctio odio voluptate qui repellat dolores provident laborum dolorum aut ipsam quod tenetur, fuga, impedit fugiat totam consequuntur enim!
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi deleniti dolores eius quod, obcaecati delectus. Temporibus nihil provident, ea assumenda quis at, omnis explicabo esse reprehenderit cumque, animi ipsum iure!
+			</div>
+		</div>
+
+		<div id='scroll4' class='scroll'>
+			<div class='part1'>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet reiciendis vitae rem quisquam cum sapiente sequi iure laborum dicta, laudantium ratione dignissimos reprehenderit alias, nostrum, cupiditate possimus! Amet, explicabo, quos.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam ut esse, culpa ab modi maxime similique architecto numquam iste odio earum voluptas molestias animi alias, repudiandae suscipit labore, velit praesentium.
+			</div>
+			<div class='part2'>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto suscipit consequatur, distinctio odio voluptate qui repellat dolores provident laborum dolorum aut ipsam quod tenetur, fuga, impedit fugiat totam consequuntur enim!
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi deleniti dolores eius quod, obcaecati delectus. Temporibus nihil provident, ea assumenda quis at, omnis explicabo esse reprehenderit cumque, animi ipsum iure!
+			</div>
+		</div>
+
+
+<!--  ***************************** 以上是banner部分 ******************************************* -->
+
+		<footer id='foot'>
+			<p>本插件手册由 @lzmoop(磨盘兄弟) 提供</p>
+			<p>jQuery-unscroll v1.0.0 | (c) 2016-2025  jQuery plug-in | lzmoop 2016-10</p>
+		</footer>
+		<script>
+			$(function(){
+				$('#scroll1').unscroll();
+				$('#scroll2').unscroll('xy');
+				$('#scroll3').unscroll({axis:'xy',display:false});
+				$('#scroll4').unscroll({axis:'xy',display:false,speed:10});
+			})
+			/* 本插件由@lzmoop(磨盘兄弟)提供 */
+		</script>
+	</body>
+</html>
