@@ -1,0 +1,50 @@
+.scroll{
+	
+	margin-top: 40px;
+	margin-left: 20px;
+	width: 200px;
+	height: 200px;
+	overflow: hidden;
+	border:1px solid #ddd;
+	float: left;
+}
+
+.part1{
+
+	width: 300px;
+
+}
+
+.part2{
+
+	width: 300px;
+
+}
+
+.lzscroll-default-Y{
+	/* Position */
+	position: absolute;
+	right: 0;
+	border-radius:6px; 
+
+	/* Size */
+	width: 8px;
+
+	/* Style */
+	background-color: #ddd;
+
+}
+
+.lzscroll-default-X{
+	/* Position */
+	position: absolute;
+	bottom: 0;
+	border-radius:6px; 
+
+	/* Size */
+	height: 8px;
+
+	/* Style */
+	background-color: #ddd;
+
+}
