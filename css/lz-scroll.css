@@ -2,16 +2,59 @@
 	
 	margin-top: 40px;
 	margin-left: 20px;
-	width: 200px;
-	height: 200px;
+	width: 30%;
+	height: 400px;
 	overflow: hidden;
 	border:1px solid #ddd;
 	float: left;
 }
 
+#show{
+
+	width: 20%;
+
+	float: left;
+
+	margin-top: 40px;
+
+	margin-left: 40px;
+
+}
+
+#control{
+
+	width: 30%;
+	float: left;
+	margin-top: 40px;
+	margin-left: 20px;
+
+}
+
+#control input[type='text']{
+
+	height: 20px;
+	border: 1px solid #eee;
+	border-radius: 3px;
+
+}
+
+section{
+
+	width: 100%;
+
+	margin-top: 10px;
+
+	display: block;
+
+}
+
+#control button{
+	margin-right: 30px;
+}
+
 .part1{
 
-	width: 300px;
+	width: 1000px;
 
 }
 
@@ -21,30 +64,52 @@
 
 }
 
-.lzscroll-default-Y{
-	/* Position */
-	position: absolute;
-	right: 0;
-	border-radius:6px; 
+.lzscroll-default-barY{
+	border-radius:10px; 
+	background-color: #ddd;
+	height:10px;
 
-	/* Size */
-	width: 8px;
+}
+
+.lzscroll-default-containerY{
+	background-color: #aaa;
+
+}
+
+.lzscroll-default-containerX{
+	background-color: #aaa;
+}
+
+.lzscroll-default-barX{
+
+	border-radius:6px; 
 
 	/* Style */
 	background-color: #ddd;
 
 }
 
-.lzscroll-default-X{
-	/* Position */
-	position: absolute;
-	bottom: 0;
+.lzscroll-xiyeye-barY{
+	border-radius:10px; 
+	background-color: #aaa;
+	height:10px;
+
+}
+
+.lzscroll-xiyeye-containerY{
+	background-color: #ddd;
+
+}
+
+.lzscroll-xiyeye-containerX{
+	background-color: #ddd;
+}
+
+.lzscroll-xiyeye-barX{
+
 	border-radius:6px; 
 
-	/* Size */
-	height: 8px;
-
 	/* Style */
-	background-color: #ddd;
+	background-color: #aaa;
 
 }
