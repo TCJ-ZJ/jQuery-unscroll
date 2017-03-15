@@ -4,11 +4,11 @@
 		<meta charset="UTF-8">
 		<title>jQuery滚动条 作者：lzmoop(磨盘兄弟) </title>
 		<script src='js/jquery-1.11.1.min.js'></script>
-		<script src="js/lz-scroll-1.3.0.js"></script>
+		<script src="js/lz-scroll.min.js"></script>
 		<link rel="stylesheet" href="css/reset-min.css">
 		<link rel="stylesheet" href="css/lz-scroll.css">
 		<style>
-			body{width:100%;height:100%;background:#eee}
+			html,body{width:100%;height:100%;background:#eee}
 			#pageHader{width: 100%;background-color:#ffba34;margin-bottom: 20px;}
 			.inPageHader{width:1024px;height:52px;line-height:52px;margin:0 auto;}
 			#pageHader h1{color:#fff;}
@@ -33,6 +33,15 @@
 			#gotoTop{width:26px;height:26px; padding:10px; background:url('./images/pic.png') 4px -120px no-repeat #ccc;position:fixed;right:0;bottom:150px;display:none;cursor:pointer;}
 			#gotoTop:hover{background-color:#f66 }
             #foot{position:fixed;bottom: 0}
+            #block{
+				
+				width:100px;
+				height:100px;
+				position: absolute;
+				top:0;
+				background-color: red;
+
+            }
 		</style>
 	</head>
 	<body>
@@ -49,6 +58,8 @@
 		
 
 		<div id='scroll1' class='scroll'>
+
+			<div id = 'block'></div>
 			<div class='part1'>
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet reiciendis vitae rem quisquam cum sapiente sequi iure laborum dicta, laudantium ratione dignissimos reprehenderit alias, nostrum, cupiditate possimus! Amet, explicabo, quos.
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam ut esse, culpa ab modi maxime similique architecto numquam iste odio earum voluptas molestias animi alias, repudiandae suscipit labore, velit praesentium.
@@ -95,6 +106,53 @@
 			</div>
 		</div>
 		
+
+		<div id='scroll2' class='scroll'>
+			<div class='part1'>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet reiciendis vitae rem quisquam cum sapiente sequi iure laborum dicta, laudantium ratione dignissimos reprehenderit alias, nostrum, cupiditate possimus! Amet, explicabo, quos.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam ut esse, culpa ab modi maxime similique architecto numquam iste odio earum voluptas molestias animi alias, repudiandae suscipit labore, velit praesentium.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet reiciendis vitae rem quisquam cum sapiente sequi iure laborum dicta, laudantium ratione dignissimos reprehenderit alias, nostrum, cupiditate possimus! Amet, explicabo, quos.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam ut esse, culpa ab modi maxime similique architecto numquam iste odio earum voluptas molestias animi alias, repudiandae suscipit labore, velit praesentium.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet reiciendis vitae rem quisquam cum sapiente sequi iure laborum dicta, laudantium ratione dignissimos reprehenderit alias, nostrum, cupiditate possimus! Amet, explicabo, quos.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam ut esse, culpa ab modi maxime similique architecto numquam iste odio earum voluptas molestias animi alias, repudiandae suscipit labore, velit praesentium.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet reiciendis vitae rem quisquam cum sapiente sequi iure laborum dicta, laudantium ratione dignissimos reprehenderit alias, nostrum, cupiditate possimus! Amet, explicabo, quos.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam ut esse, culpa ab modi maxime similique architecto numquam iste odio earum voluptas molestias animi alias, repudiandae suscipit labore, velit praesentium.
+			</div>
+			<div class='part2'>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto suscipit consequatur, distinctio odio voluptate qui repellat dolores provident laborum dolorum aut ipsam quod tenetur, fuga, impedit fugiat totam consequuntur enim!
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi deleniti dolores eius quod, obcaecati delectus. Temporibus nihil provident, ea assumenda quis at, omnis explicabo esse reprehenderit cumque, animi ipsum iure!
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet reiciendis vitae rem quisquam cum sapiente sequi iure laborum dicta, laudantium ratione dignissimos reprehenderit alias, nostrum, cupiditate possimus! Amet, explicabo, quos.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam ut esse, culpa ab modi maxime similique architecto numquam iste odio earum voluptas molestias animi alias, repudiandae suscipit labore, velit praesentium.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet reiciendis vitae rem quisquam cum sapiente sequi iure laborum dicta, laudantium ratione dignissimos reprehenderit alias, nostrum, cupiditate possimus! Amet, explicabo, quos.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam ut esse, culpa ab modi maxime similique architecto numquam iste odio earum voluptas molestias animi alias, repudiandae suscipit labore, velit praesentium.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet reiciendis vitae rem quisquam cum sapiente sequi iure laborum dicta, laudantium ratione dignissimos reprehenderit alias, nostrum, cupiditate possimus! Amet, explicabo, quos.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam ut esse, culpa ab modi maxime similique architecto numquam iste odio earum voluptas molestias animi alias, repudiandae suscipit labore, velit praesentium.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto suscipit consequatur, distinctio odio voluptate qui repellat dolores provident laborum dolorum aut ipsam quod tenetur, fuga, impedit fugiat totam consequuntur enim!
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi deleniti dolores eius quod, obcaecati delectus. Temporibus nihil provident, ea assumenda quis at, omnis explicabo esse reprehenderit cumque, animi ipsum iure!
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet reiciendis vitae rem quisquam cum sapiente sequi iure laborum dicta, laudantium ratione dignissimos reprehenderit alias, nostrum, cupiditate possimus! Amet, explicabo, quos.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam ut esse, culpa ab modi maxime similique architecto numquam iste odio earum voluptas molestias animi alias, repudiandae suscipit labore, velit praesentium.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet reiciendis vitae rem quisquam cum sapiente sequi iure laborum dicta, laudantium ratione dignissimos reprehenderit alias, nostrum, cupiditate possimus! Amet, explicabo, quos.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam ut esse, culpa ab modi maxime similique architecto numquam iste odio earum voluptas molestias animi alias, repudiandae suscipit labore, velit praesentium.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet reiciendis vitae rem quisquam cum sapiente sequi iure laborum dicta, laudantium ratione dignissimos reprehenderit alias, nostrum, cupiditate possimus! Amet, explicabo, quos.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam ut esse, culpa ab modi maxime similique architecto numquam iste odio earum voluptas molestias animi alias, repudiandae suscipit labore, velit praesentium.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto suscipit consequatur, distinctio odio voluptate qui repellat dolores provident laborum dolorum aut ipsam quod tenetur, fuga, impedit fugiat totam consequuntur enim!
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi deleniti dolores eius quod, obcaecati delectus. Temporibus nihil provident, ea assumenda quis at, omnis explicabo esse reprehenderit cumque, animi ipsum iure!
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet reiciendis vitae rem quisquam cum sapiente sequi iure laborum dicta, laudantium ratione dignissimos reprehenderit alias, nostrum, cupiditate possimus! Amet, explicabo, quos.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam ut esse, culpa ab modi maxime similique architecto numquam iste odio earum voluptas molestias animi alias, repudiandae suscipit labore, velit praesentium.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet reiciendis vitae rem quisquam cum sapiente sequi iure laborum dicta, laudantium ratione dignissimos reprehenderit alias, nostrum, cupiditate possimus! Amet, explicabo, quos.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam ut esse, culpa ab modi maxime similique architecto numquam iste odio earum voluptas molestias animi alias, repudiandae suscipit labore, velit praesentium.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet reiciendis vitae rem quisquam cum sapiente sequi iure laborum dicta, laudantium ratione dignissimos reprehenderit alias, nostrum, cupiditate possimus! Amet, explicabo, quos.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam ut esse, culpa ab modi maxime similique architecto numquam iste odio earum voluptas molestias animi alias, repudiandae suscipit labore, velit praesentium.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto suscipit consequatur, distinctio odio voluptate qui repellat dolores provident laborum dolorum aut ipsam quod tenetur, fuga, impedit fugiat totam consequuntur enim!
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi deleniti dolores eius quod, obcaecati delectus. Temporibus nihil provident, ea assumenda quis at, omnis explicabo esse reprehenderit cumque, animi ipsum iure!
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet reiciendis vitae rem quisquam cum sapiente sequi iure laborum dicta, laudantium ratione dignissimos reprehenderit alias, nostrum, cupiditate possimus! Amet, explicabo, quos.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam ut esse, culpa ab modi maxime similique architecto numquam iste odio earum voluptas molestias animi alias, repudiandae suscipit labore, velit praesentium.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet reiciendis vitae rem quisquam cum sapiente sequi iure laborum dicta, laudantium ratione dignissimos reprehenderit alias, nostrum, cupiditate possimus! Amet, explicabo, quos.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam ut esse, culpa ab modi maxime similique architecto numquam iste odio earum voluptas molestias animi alias, repudiandae suscipit labore, velit praesentium.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet reiciendis vitae rem quisquam cum sapiente sequi iure laborum dicta, laudantium ratione dignissimos reprehenderit alias, nostrum, cupiditate possimus! Amet, explicabo, quos.
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam ut esse, culpa ab modi maxime similique architecto numquam iste odio earum voluptas molestias animi alias, repudiandae suscipit labore, velit praesentium.
+			</div>
+		</div>
 		
 		<div id="control">
 			
@@ -129,80 +187,17 @@
 			<p>lz-scroll v1.0.0 | (c) 2016-2025  jQuery plug-in | lzmoop 2016-10</p>
 		</footer>
 		<script>
-			$(function(){
 
-				console.log($('#scroll1').prop('scrollHeight'))
-				var k = $('#scroll1').lzscroll({axis:'xy'})
 
-				k.on('scroll', function(param,status) {
+				var k = $('#scroll1').lzscroll({axis:'yx',mode:'always',distance:500,speed:300})
+
+				$('#scroll1').scrollTool().on('update', function() {
+
+					$('#block').css('top',this.scrollTop())
 					
-					$('#show').find('span').eq(0).text(k.scrollTop());
-
-					$('#show').find('span').eq(1).text(k.scrollLeft());
-
-				})
-
-				$('#scrollTop').on('click', function(e) {
-					
-					$(this).next().text(k.scrollTop());
-
 				});
 
-				$('#setScrollTop').on('click', function(e) {
-					
-					k.scrollTop($(this).next().val());
 
-				});
-
-				$('#scrollLeft').on('click', function(e) {
-					
-					$(this).next().text(k.scrollTop());
-
-				});
-
-				$('#setScrollLeft').on('click', function(e) {
-					
-					k.scrollLeft($(this).next().val());
-
-				});
-
-				$('#setContainer').on('click', function(e) {
-					
-					k.setContainerWidth($(this).next().val())
-
-				});
-
-				$('#setBar').on('click', function(e) {
-					
-					k.setBarWidth($(this).next().val())
-
-				});
-
-				$('#setMode').on('click', function(e) {
-					
-					k.setMode($("input[name='mode']:checked").val())
-
-				});
-
-				$('#setTheme').on('click', function(e) {
-					
-					k.setTheme($(this).next().val());
-
-				});
-
-				$('#setSpeed').on('click', function(e) {
-					
-					k.setSpeed($(this).next().val());
-
-				});
-
-				$('#init').on('click', function(e) {
-					
-					k.init({axis:'xy'})
-
-				});
-				
-			})
 			/* 本插件由@lzmoop(磨盘兄弟)提供 */
 		</script>
 	</body>
