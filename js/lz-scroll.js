@@ -1,9 +1,3 @@
-/*!
- * lz-scroll v1.0.0
- * Copyright © lzmoop ( 磨盘兄弟 )
- * Author: Jack Zhang
- * Date: 2017
-*/
 ;(function($){
 
 	$.extend({
@@ -17,6 +11,15 @@
 		}
 
 	});
+
+	var requestAnimationFrame =window.requestAnimationFrame ||window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function( callback ){
+
+				window.setTimeout(callback, 1000 / 60);
+
+			},
+
+
+	cancelRequestAnimationFrame = window.cancelAnimationFrame || clearTimeout;
 
 	var scrollEvent = function(val){
 
@@ -57,13 +60,7 @@
 
 			param = this.param,
 
-			status = this.status,
-
-			requestAnimationFrame =window.requestAnimationFrame ||window.webkitRequestAnimationFrame ||window.mozRequestAnimationFrame || function( callback ){
-
-				window.setTimeout(callback, 1000 / 60);
-
-			}
+			status = this.status;
 
 			me.on('mousewheel.lzscroll DOMMouseScroll.lzscroll', function(e) {
 
@@ -71,45 +68,22 @@
 
 				var control = param.axis ==='x'?status.controlW:status.controlH,
 
-				scroll = param.axis ==='x'?me.scrollLeft():me.scrollTop(),
-
 				content = param.axis ==='x'?status.contentW:status.contentH,
 
 				box = param.axis ==='x'?status.boxW:status.boxH,
 
-				temp = scroll;
+				temp = param.axis ==='x'?me.scrollLeft():me.scrollTop();
 
 				if(status.canWheel && control){
 
 					var delta = (e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1 : -1)) || // chrome & ie 判断滚轮方向
 	            		(e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1 : 1));// firefox  判断滚轮方向
 
-	            		var times = param.animation?~~(param.speed/100*6):1,
+	            		self._setAnimateParam(param.animation?~~(param.speed/100*6):1,param.distance*(-delta),param.axis);
 
-	            		dis = ~~(param.distance/times),
+	            		self._animateScroll(me.get(0),param.axis);
 
-	            		step = function(){
-
-	            			times--;
-
-	            			if(delta>0)
-
-	            				scroll -=dis;
-
-	            			else if(delta<0) 
-
-	            				scroll +=dis;
-
-	            			scroll = param.axis==='x'?self._doScrollX(scroll):self._doScrollY(scroll);
-
-	            			if(times>0){
-
-	            				requestAnimationFrame(step)
-
-	            			}
-	            		}
-
-	            		step();
+	            		var scroll = param.axis ==='x'?me.scrollLeft():me.scrollTop();
 
 	            		if((temp!==0 || scroll!==0) && (temp!==content-box || scroll!==content-box)) return false;
 
@@ -383,6 +357,48 @@
 
 	scrollMethods.prototype = {
 
+		_setAnimateParam:function(times,dis,dir){
+
+			var status = this.status;
+
+			status.times = times>1?times:1;
+
+	        status.dis = ~~(dis/status.times);
+
+	        status.dir = dir==='x'?'x':'y';
+
+		},
+
+		_fixScrollVal:function(scroll){
+
+			var status = this.status;
+
+			scroll = (scroll<0)?0:scroll;
+
+			scroll = (scroll>(status.contentH-status.boxH))?status.contentH-status.boxH:scroll;
+
+			return scroll;	
+
+		},
+
+		_animateScroll:function(){
+
+			var status = this.status;
+
+			status.times--;
+
+			status.dir==='x'?this._doScrollX(status.scrollW+status.dis):this._doScrollY(status.scrollH+status.dis);
+
+			cancelRequestAnimationFrame(status.requestid);
+
+			if(status.times>0){
+
+				status.requestid = requestAnimationFrame(this._animateScroll.bind(this));
+
+			}
+
+		},
+
 		_updateBox:function(){
 
 			var me = this.$ele,
@@ -439,9 +455,7 @@
 
 			status = this.status;
 
-			scroll = (scroll<0)?0:scroll;
-
-	        scroll = (scroll>(status.contentH-status.boxH))?status.contentH-status.boxH:scroll;			
+			scroll = this._fixScrollVal(scroll);
 
 			var moveH = ~~(scroll*(status.boxH-status.space-status.controlH)/(status.contentH-status.boxH)+0.5);
 
@@ -463,8 +477,6 @@
 
 			me.scrollTop(scroll);
 
-			return scroll;
-
 		},
 
 		_doScrollX : function(scroll){
@@ -475,9 +487,7 @@
 
 			status = this.status;
 
-			scroll = (scroll<0)?0:scroll;
-
-	        scroll = (scroll>(status.contentW-status.boxW))?status.contentW-status.boxW:scroll;
+			scroll = this._fixScrollVal(scroll);
 
 			var moveW = ~~(scroll*(status.boxW-status.space-status.controlW)/(status.contentW-status.boxW)+0.5);
 
@@ -498,8 +508,6 @@
 			param._onUpdate && param._onUpdate();
 
 			me.scrollLeft(scroll);
-
-			return scroll;
 
 		},
 
@@ -614,7 +622,11 @@
 			scrollH:0,
 			scrollW:0,
 			space:0,
-			timer:null
+			timer:null,
+			times:0,
+			dis:0,
+			requestid:0,
+			dir:'y'
 		})
 	}
 
@@ -899,27 +911,61 @@
 			return this;
 		},
 
-		scrollLeft:function(num){
+		scrollLeft:function(num,speed){
 
-			var me = this.$ele;
+			var me = this.$ele,
 
-			if(num === undefined)
-				return me.eq(0).data('lzscroll-status').scrollW;
-			else
-				me.get(0).scrollMethods._doScrollX(num);
+			self = me.get(0).scrollMethods,
 
+			status = me.eq(0).data('lzscroll-status'),
+
+			param = me.eq(0).data('lzscroll-param');
+
+			speed = speed || param.speed;
+
+			if(num === undefined){
+
+				return status.scrollW;
+
+			}
+			else{
+
+				num = self._fixScrollVal(num);
+
+				self._setAnimateParam(param.animation?~~(speed/100*6):1,num-status.scrollW,'x');	
+
+				self._animateScroll(num);
+
+			}
+				
 			return this;
 
 		},
 
-		scrollTop:function(num){
+		scrollTop:function(num,speed){
 
-			var me = this.$ele;
+			var me = this.$ele,
 
-			if(num ===undefined)
-				return me.eq(0).data('lzscroll-status').scrollH;
-			else
-				me.get(0).scrollMethods._doScrollY(num);
+			self = me.get(0).scrollMethods,
+
+			status = me.eq(0).data('lzscroll-status'),
+
+			param = me.eq(0).data('lzscroll-param'),
+
+			speed = speed || param.speed;
+
+			if(num ===undefined){
+
+				return status.scrollH;
+			}else{
+
+				num = self._fixScrollVal(num);
+
+				self._setAnimateParam(param.animation?~~(speed/100*6):1,num-status.scrollH,'y');
+
+				self._animateScroll(num);
+
+			}
 
 			return this;
 
